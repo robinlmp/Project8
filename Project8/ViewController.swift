@@ -55,6 +55,11 @@ class ViewController: UIViewController {
                 ac.addAction(UIAlertAction(title: "Let's go!", style: .default, handler: levelUp))
                 present(ac, animated: true)
             }
+        } else {
+            // error
+            let ac = UIAlertController(title: "Wrong!", message: "That isn't corect", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK`", style: .default, handler: clearTapped2))
+            present(ac, animated: true)
         }
     }
     
@@ -70,6 +75,16 @@ class ViewController: UIViewController {
     }
 
     @objc func clearTapped(_ sender: UIButton) {
+        currentAnswer.text = ""
+
+        for btn in activatedButtons {
+            btn.isHidden = false
+        }
+
+        activatedButtons.removeAll()
+    }
+    
+    func clearTapped2(action: UIAlertAction) {
         currentAnswer.text = ""
 
         for btn in activatedButtons {
@@ -128,6 +143,8 @@ class ViewController: UIViewController {
         
         let buttonsView = UIView()
         buttonsView.translatesAutoresizingMaskIntoConstraints = false
+        buttonsView.layer.borderWidth = 1
+        buttonsView.layer.cornerRadius = 25
         view.addSubview(buttonsView)
         
         
